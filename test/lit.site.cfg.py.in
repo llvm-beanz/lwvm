@@ -1,0 +1,17 @@
+@LIT_SITE_CFG_IN_HEADER@
+
+config.lwvm_src_root = path(r"@LWVM_SOURCE_DIR@")
+config.lwvm_obj_root = path(r"@LWVM_BINARY_DIR@")
+
+config.llvm_src_root = path(r"@LLVM_SOURCE_DIR@")
+config.llvm_obj_root = path(r"@LLVM_BINARY_DIR@")
+config.llvm_tools_dir = lit_config.substitute(path(r"@LLVM_TOOLS_DIR@"))
+
+config.llvm_build_mode = "@LLVM_BUILD_MODE@"
+config.python_executable = "@PYTHON_EXECUTABLE@"
+
+import lit.llvm
+lit.llvm.initialize(lit_config, config)
+
+# Let the main config do the real work.
+lit_config.load_config(config, "@LWVM_SOURCE_DIR@/test/lit.cfg.py")
